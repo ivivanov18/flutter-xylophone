@@ -4,9 +4,20 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-  void playSound(int soundNumber){
+  void playSound(int soundNumber) {
     final player = AudioCache();
     player.play('note$soundNumber.wav');
+  }
+
+  Expanded buildKey({int keySound, Color keyColor}) {
+    return Expanded(
+      child: FlatButton(
+        color: keyColor,
+        onPressed: () {
+          playSound(keySound);
+        },
+      ),
+    );
   }
 
   @override
@@ -15,49 +26,15 @@ class XylophoneApp extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FlatButton(
-                  color: Colors.redAccent,
-                  onPressed: (){
-                    playSound(1);
-                  },
-              ),
-              FlatButton(
-                color: Colors.orange,
-                onPressed: (){
-                  playSound(2);
-                },
-              ),
-              FlatButton(
-                color: Colors.yellow,
-                onPressed: (){
-                  playSound(3);
-                },
-              ),
-              FlatButton(
-                color: Colors.greenAccent,
-                onPressed: (){
-                  playSound(4);
-                },
-              ),
-              FlatButton(
-                color: Colors.green,
-                onPressed: (){
-                  playSound(5);
-                },
-              ),
-              FlatButton(
-                color: Colors.blue,
-                onPressed: (){
-                  playSound(6);
-                },
-              ),
-              FlatButton(
-                color: Colors.purple,
-                onPressed: (){
-                  playSound(7);
-                },
-              ),
+              buildKey(keySound: 1, keyColor: Colors.redAccent),
+              buildKey(keySound: 2, keyColor: Colors.orange),
+              buildKey(keySound: 3, keyColor: Colors.yellow),
+              buildKey(keySound: 4, keyColor: Colors.greenAccent),
+              buildKey(keySound: 5, keyColor: Colors.green),
+              buildKey(keySound: 6, keyColor: Colors.blue),
+              buildKey(keySound: 7, keyColor: Colors.purple),
             ],
           ),
         ),
